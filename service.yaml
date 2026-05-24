@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tke-test
+  labels:
+    app: mywebapp
+spec:
+  type: ClusterIP
+  selector:
+    app: mywebapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
