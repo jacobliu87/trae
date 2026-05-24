@@ -55,12 +55,7 @@ export const Select: React.FC<SelectProps> = ({ label, options, error, className
   );
 };
 
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: string;
-  error?: string;
-}
-
-export const Textarea: React.FC<TextareaProps> = ({ label, error, className = '', ...props }) => {
+export const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement> & { label?: string }> = ({ label, className = '', ...props }) => {
   return (
     <div className="w-full">
       {label && (
@@ -69,12 +64,9 @@ export const Textarea: React.FC<TextareaProps> = ({ label, error, className = ''
         </label>
       )}
       <textarea
-        className={`w-full px-4 py-2 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
-          error ? 'border-red-500' : 'border-gray-300'
-        } ${className}`}
+        className={`w-full px-4 py-2 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent border-gray-300 ${className}`}
         {...props}
       />
-      {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
     </div>
   );
 };

@@ -69,6 +69,14 @@ export const generateChapterSchedule = (config: SchedulingConfig): ScheduleItem[
   const courseStates = buildCourseStates(courses, chapters);
   if (courseStates.length === 0) return [];
 
+  let remainingUnits = 0;
+  for (let w = 0; w < weeks; w++) {
+    for (const cs of courseStates) {
+      const unitsLeft = cs.units.length - cs.nextIndex;
+      remainingUnits += Math.min(unitsLeft, cs.weeklyLimit);
+    }
+  }
+
   const start = new Date(startDate);
   const isRandom = rule === 'random';
   const shuffledTimeSlots = isRandom ? shuffleArray(timeSlots) : timeSlots;
